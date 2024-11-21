@@ -1,0 +1,24 @@
+This is my Day 72
+This is a part of GFG 160 - day(7)
+
+
+problem - Stock Buy & Sell
+
+code: C++
+
+class Solution {
+  public:
+    int maximumProfit(vector<int> &prices) {
+        // code here
+        int n = prices.size();
+        int profit = 0;
+        for(int i = 0; i<n-1 ;i++){
+            if(prices[i+1]>prices[i]) profit += prices[i+1]-prices[i]; // for total profit +=
+            
+        }
+        return profit;
+    }
+};
+
+---------------------------------
+For future update : 
