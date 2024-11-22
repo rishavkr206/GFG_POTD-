@@ -1,0 +1,61 @@
+My code : 
+
+public:
+    int maximumProfit(vector<int> &prices) {
+        // code here
+        int profit = 0;
+        int n =prices.size();
+      //  int a = -1, b= -1;
+        
+        int min = INT_MAX;
+        for(int i = 0; i<n;i++){
+            if(prices[i]< min){
+                min = prices[i];
+               // a = i; //
+            }
+            
+            int profit2 = prices[i] - min;
+            
+            if(profit2 > profit){
+                profit = profit2;
+            }
+        }
+        
+        
+        return profit;
+    }
+};
+
+----------------------------------------
+code by yt -  code kar lo
+
+int maximumProfit(vector<int> &prices) {
+        // code here
+        int n=prices.size(),buy=prices[0],profit=0;
+        for(int i=1;i<n;i++){
+            if(prices[i]<=buy){
+                buy=prices[i];
+            }
+            else{
+                profit=max(profit,prices[i]-buy);
+            }
+        }
+        return profit;
+    }
+
+--------------------------
+code genius : 
+class Solution {
+  public:
+    int maximumProfit(vector<int> &prices) {
+        //CodeGenius
+        int maxele=0,maxProfit=0;
+        for(int i=prices.size()-1;i>=0;i--){
+            maxele=max(maxele,prices[i]);
+            maxProfit=max(maxProfit,maxele-prices[i]);
+        }
+        return maxProfit;
+    }
+};
+
+
