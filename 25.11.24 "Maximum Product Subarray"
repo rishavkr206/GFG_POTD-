@@ -1,0 +1,22 @@
+
+
+public:
+    // Function to find maximum product subarray
+    int maxProduct(vector<int> &arr) {
+        // Your Code Here
+        int prod=1;
+        //int maxprod=arr[0];
+        int prodend= 1, n= arr.size(), ans = INT_MIN;
+        
+        for(int i = 0;i<n;i++){
+            
+            prod*=arr[i];
+            prodend *= arr[n-1-i];
+            ans = max({ans, prod, prodend});
+            if(prod == 0) prod = 1;
+            if(prodend==0) prodend = 1;
+            
+        }
+        return ans ;
+    }
+};
