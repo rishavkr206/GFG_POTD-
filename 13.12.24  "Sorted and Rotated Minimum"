@@ -1,0 +1,20 @@
+Sorted and Rotated Minimum  https://www.geeksforgeeks.org/problems/minimum-element-in-a-sorted-and-rotated-array3611/1
+
+class Solution {
+  public:
+    int findMin(vector<int>& arr) {
+        // complete the function here
+        
+        // sort(arr.begin(), arr.end()) ;
+        // return arr[0];  First Method 
+        
+        //  2nd method 
+        int n = arr.size(), low = 0, high  = n-1, mid=0;
+        while(low < high){
+            mid= (low+high)/2 ;
+            if(arr[mid]<arr[high]) high =mid;
+            else low = mid+1 ;
+        }
+        return arr[low];
+    }
+};
