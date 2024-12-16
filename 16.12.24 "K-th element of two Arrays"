@@ -1,0 +1,34 @@
+K-th element of two Arrays  https://www.geeksforgeeks.org/problems/k-th-element-of-two-sorted-array1317/1
+
+
+class Solution {
+  public:
+    int kthElement(vector<int>& a, vector<int>& b, int k) {
+        // take the smaller array first 
+        int n = a.size(), m = b.size();
+        if(n>m) return kthElement(b,a,k); 
+        
+        //Binary search 
+        int low = max(0, k-m) , high = min(k,n);
+        
+        while(low<=high){
+            int partitionA = low + (high-low)/2;
+            int partitionB = k - partitionA;
+            
+            int maxLeftA = partitionA == 0 ? INT_MIN : a[partitionA -1];
+            int maxLeftB = partitionB == 0 ? INT_MIN : b[partitionB -1];
+            
+            int minRightA = partitionA == n ? INT_MAX : a[partitionA];
+            int minRightB = partitionB == m ? INT_MAX : b[partitionB];
+            
+            if(maxLeftA <= minRightB && maxLeftB <= minRightA)
+            return max(maxLeftA, maxLeftB);
+            else if(maxLeftA > minRightB)
+            high = partitionA - 1;
+            else low = partitionA+1;
+        }
+        
+        return -1;
+        
+    }
+};
