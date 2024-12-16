@@ -1,0 +1,26 @@
+Sort 0s, 1s and 2s  https://www.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s4231/1
+
+class Solution {
+  public:
+    void sort012(vector<int>& arr) {
+        // code here
+      //  sort(arr.begin(), arr.end());  one line solution 
+      
+      // use Dutch flag algo
+      int red = 0, white = 0, blue = arr.size()-1;
+      while(white<=blue){
+          if(arr[white]==0){
+              swap(arr[white], arr[red]);
+              white++, red++;
+          }else if(arr[white]==1) {
+              white++;
+          }
+          else{
+              swap(arr[white], arr[blue]);
+              blue--;
+          }
+          
+      }
+      
+    }
+};
