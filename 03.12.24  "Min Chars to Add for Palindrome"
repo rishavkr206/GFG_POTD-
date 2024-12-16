@@ -1,0 +1,30 @@
+Min Chars to Add for Palindrome  https://www.geeksforgeeks.org/problems/minimum-characters-to-be-added-at-front-to-make-string-palindrome/1
+
+class Solution {
+  public:
+    int minChar(string& s) {
+        // Write your code here
+        //first create pattern string
+        string rev = s;
+        reverse(rev.begin(), rev.end());
+        string pat = s + "|" + rev;
+        
+        int k = pat.size();
+        
+        // Create LPS table 
+        
+        vector<int> lps(k, 0);
+        for(int i = 1, len = 0; i<k; ){
+            if(pat[i]==pat[len]){
+                lps[i++] = ++len;
+            }
+            else if (len){
+                len = lps[len-1];
+            } else{
+                lps[i++] = 0;
+            }
+        }
+        return s.size() - lps[k-1];
+        
+    }
+};
