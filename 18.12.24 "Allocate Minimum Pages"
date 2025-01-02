@@ -1,0 +1,38 @@
+Allocate Minimum Pages https://www.geeksforgeeks.org/problems/allocate-minimum-number-of-pages0937/1
+
+class Solution {
+  public:
+  bool isposible(vector<int> &arr, int k, int maxpages){
+      int students = 1, totalpages = 0;
+      for(auto   page : arr){
+          if(page > maxpages) return false;
+          if(totalpages + page > maxpages){
+              students++ ;
+              totalpages = page;
+              if(students > k) return false;
+          } else {
+              totalpages += page ;
+              
+          }
+      }
+      return true;
+  }
+    int findPages(vector<int> &arr, int k) {
+        // code here
+        int n = arr.size();
+        if(k>n) return -1;
+        int low = *max_element(arr.begin(), arr.end());
+        int high = accumulate(arr.begin(), arr.end(), 0);
+        int res = -1 ;
+        while(low <= high){
+            int mid = low + (high-low)/2 ;
+            if(isposible(arr, k, mid)){
+                res = mid;
+                high = mid -1;
+            }else {
+                low = mid+1;
+            }
+        }
+        return res;
+    }
+};
