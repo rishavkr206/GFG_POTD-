@@ -1,0 +1,17 @@
+Count pairs with given sum  https://www.geeksforgeeks.org/problems/count-pairs-with-given-sum--150253/1
+
+class Solution {
+  public:
+    int countPairs(vector<int> &arr, int target) {
+        // Code here
+       
+       unordered_map<int, int> mm;
+       int count = 0;
+       for(int i = 0 ; i< arr.size(); i++){
+          int sec = target - arr[i];
+          count += mm[sec];
+          mm[arr[i]]++; // no count will increase
+       }
+       return count;
+    }
+};
