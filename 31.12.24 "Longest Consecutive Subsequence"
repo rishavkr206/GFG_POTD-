@@ -1,0 +1,29 @@
+Longest Consecutive Subsequence  https://www.geeksforgeeks.org/problems/longest-consecutive-subsequence2449/1
+
+
+class Solution {
+  public:
+    // Function to return length of longest subsequence of consecutive integers.
+    int longestConsecutive(vector<int>& arr) {
+        int n = arr.size();
+        unordered_set<int> st(arr.begin(), arr.end());
+        int maxlen = 0;
+        
+        for(int x : st){
+           if(st.find(x-1) == st.end()){
+               int curNum = x;
+               int currentLen = 1;
+               
+               while(st.find(curNum +1) != st.end()){
+                   curNum++;
+                   currentLen++;
+               }
+               maxlen = max(maxlen, currentLen);
+        }
+        }
+        return  maxlen;
+    }
+};
+
+
+Bye Bye 2024 Worst year For me 
