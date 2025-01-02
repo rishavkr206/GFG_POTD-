@@ -1,0 +1,16 @@
+Union of Arrays with Duplicates  https://www.geeksforgeeks.org/problems/union-of-two-arrays3538/1
+
+
+class Solution {
+  public:
+    // Function to return the count of number of elements in union of two arrays.
+    int findUnion(vector<int>& a, vector<int>& b) {
+        // code here
+        // solve using map 
+        unordered_map<int , int> first;
+        for(int x : a) first[x]++;
+        for(int x : b) first[x]++;
+      
+        return first.size();
+    }
+};
