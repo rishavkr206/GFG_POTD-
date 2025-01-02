@@ -1,0 +1,19 @@
+Kth Missing Positive Number in a Sorted Array  https://www.geeksforgeeks.org/problems/kth-missing-positive-number-in-a-sorted-array/1
+
+
+
+class Solution {
+  public:
+    int kthMissing(vector<int> &arr, int k) {
+        // Your code goes here
+        int start = 0, end = arr.size()-1;
+        
+        while(start <= end){
+            int mid = start + ( end - start )/2 ;
+            int missing = arr[mid] - mid - 1 ; 
+            if(missing < k) start = mid + 1;
+            else end = mid -1;
+             }
+             return start + k;
+    }
+};
