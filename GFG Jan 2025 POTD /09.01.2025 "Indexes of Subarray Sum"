@@ -1,0 +1,25 @@
+Indexes of Subarray Sum  https://www.geeksforgeeks.org/problems/subarray-with-given-sum-1587115621/1
+
+class Solution {
+  public:
+    vector<int> subarraySum(vector<int> &arr, int target) {
+        // code here
+        // Use sliding window
+        
+        int i = 0, n = arr.size() ; 
+        int sum = 0;
+        for(int j = 0; j<n ;j++){
+            sum += arr[j];
+            
+            while(target < sum && i<=j){
+                sum -= arr[i];
+                i++;
+            }
+            if(sum == target) {
+                return {i+1, j+1};
+            }
+        }
+        return {-1};
+        
+    }
+};
