@@ -1,0 +1,19 @@
+Count Subarrays with given XOR https://www.geeksforgeeks.org/problems/count-subarray-with-given-xor/1
+
+
+class Solution {
+  public:
+    long subarrayXor(vector<int> &arr, int k) {
+        // code here
+        int Pxor= 0 , count = 0;
+        unordered_map<int, int> mp;
+        
+        for(int i =0; i<arr.size();i++){
+            Pxor ^=arr[i];
+            if(Pxor == k) count++;
+            if(mp.find(Pxor^k) != mp.end()) count += mp[Pxor^k];
+            mp[Pxor]++;
+        }
+        return count;
+    }
+};
