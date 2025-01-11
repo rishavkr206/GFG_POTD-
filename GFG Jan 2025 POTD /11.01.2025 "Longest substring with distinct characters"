@@ -1,0 +1,22 @@
+Longest substring with distinct characters   https://www.geeksforgeeks.org/problems/longest-distinct-characters-in-string5848/1
+
+
+class Solution {
+  public:
+    int longestUniqueSubstr(string &s) {
+        // code here
+       vector<bool>visited(26,false);
+       int maxi = INT_MIN;
+       int left = 0, right =0;
+       while(right<s.size()){
+           while(visited[s[right]-'a'] ==true){
+               visited[s[left]-'a'] = false;
+               left++;
+           }
+           visited[s[right]-'a'] = true;
+           maxi = max(maxi, right-left+1);
+           right++;
+       }
+        return maxi;
+    }
+};
