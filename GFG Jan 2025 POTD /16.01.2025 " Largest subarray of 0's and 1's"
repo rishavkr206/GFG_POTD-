@@ -1,0 +1,23 @@
+ Largest subarray of 0's and 1's  https://www.geeksforgeeks.org/problems/largest-subarray-of-0s-and-1s/1
+
+Prefix Sum + hash map
+
+class Solution {
+  public:
+    int maxLen(vector<int> &arr) {
+        int k =0;
+        for(int i = 0; i< arr.size();i++){
+            if(arr[i] == 0) arr[i] = -1;
+        }
+        int Psum = 0, length = 0;
+        map<int , int> mp;
+        for(int i = 0 ; i<arr.size();i++){
+        Psum += arr[i];
+        if(Psum == k) length = max(length , i+1);
+        if(mp.find(Psum) == mp.end()) mp[Psum] = i;
+        if(mp.find(Psum - k) != mp.end()) length = max(length, i-mp[Psum-k]);
+        }
+        return length;
+            
+    }
+};
