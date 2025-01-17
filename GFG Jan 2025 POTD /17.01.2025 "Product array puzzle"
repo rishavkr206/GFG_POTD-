@@ -1,0 +1,35 @@
+Product array puzzle   https://www.geeksforgeeks.org/problems/product-array-puzzle4525/1
+
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& arr) {
+        int zeroCount = 0;
+        int totalProd = 1;
+        int zeroIndex = -1;
+
+        for (int i = 0; i < arr.size(); i++) {
+            if (arr[i] == 0) {
+                zeroCount++;
+                zeroIndex = i;
+            } else {
+                totalProd *= arr[i];
+            }
+        }
+
+        vector<int> res(arr.size(), 0);
+        if (zeroCount > 1) {
+            return res;
+        } else if (zeroCount == 1) {
+            res[zeroIndex] = totalProd;
+            return res;
+        }
+
+        for (int i = 0; i < arr.size(); i++) {
+            res[i] = totalProd / arr[i];
+        }
+
+        return res;
+    }
+};
+
+
