@@ -1,0 +1,23 @@
+Linked List Group Reverse   https://www.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-given-size/1
+
+
+
+class Solution {
+  public:
+    Node *reverseKGroup(Node *head, int k) {
+        Node *curr = head, *prev = NULL, *next = curr-> next;
+        int count = 0;
+        
+       if(!head) return head;
+        
+        while(curr && count < k){
+            next = curr -> next;
+            curr -> next = prev;
+            prev = curr;
+            curr = next;
+            count++;
+        }
+        if(next) head -> next = reverseKGroup(next, k);
+        return prev;
+    }
+};
