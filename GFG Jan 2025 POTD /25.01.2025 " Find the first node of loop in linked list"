@@ -1,0 +1,22 @@
+ Find the first node of loop in linked list  https://www.geeksforgeeks.org/problems/find-the-first-node-of-loop-in-linked-list--170645/1
+
+class Solution {
+  public:
+    Node* findFirstNode(Node* head) {
+        Node *slow = head, *fast = head;
+        while(fast && fast-> next){
+            slow = slow -> next;
+            fast = fast -> next -> next;
+            if(slow == fast){
+                slow = head ;
+                while(slow != fast){
+                    fast = fast -> next;
+                    slow = slow -> next;
+                }
+                return fast;
+            }
+        }
+        return NULL;
+        
+    }
+};
