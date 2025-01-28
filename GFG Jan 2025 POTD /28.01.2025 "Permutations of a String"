@@ -1,0 +1,31 @@
+Permutations of a String  https://www.geeksforgeeks.org/problems/permutations-of-a-given-string2041/1
+
+class Solution {
+  public:
+  
+        void solve(int i,int n,string &s,string &per,unordered_set<string> &st){
+        if(per.size()==n){
+            st.insert(per);
+            return;
+        }
+        
+        for(int j=i;j<n;j++){
+            swap(s[i],s[j]);
+            per.push_back(s[i]);
+            solve(i+1,n,s,per,st);
+            per.pop_back();
+            swap(s[i],s[j]);
+            
+        }
+    }
+  
+    vector<string> findPermutation(string &s) {
+        unordered_set<string>st;
+        string per;
+        int n=s.size();
+        solve(0,n,s,per,st);
+        vector<string> result(st.begin(),st.end());
+        return result;
+        
+    }
+};
