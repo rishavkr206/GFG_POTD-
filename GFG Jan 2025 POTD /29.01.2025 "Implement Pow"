@@ -1,0 +1,19 @@
+Implement Pow    https://www.geeksforgeeks.org/problems/powx-n/1
+
+
+  class Solution {
+  public:
+    double power(double b, int e) {
+       
+        if(e== 0) return 1;
+        if(e < 0 ) return 1/power(b, -e);
+       
+        double prod = power(b , e/2);
+        if(e % 2 != 0){
+            return b*prod*prod;
+        }else{
+            return prod*prod;1
+        }
+        
+    }
+};
