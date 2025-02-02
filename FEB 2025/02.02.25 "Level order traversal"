@@ -1,0 +1,24 @@
+Level order traversal  https://www.geeksforgeeks.org/problems/level-order-traversal/1
+
+class Solution {
+  public:
+    vector<vector<int>> levelOrder(Node *root) {
+          
+          vector<vector<int>>res;
+          queue<Node*> q;
+          q.push(root);
+          
+          while(!q.empty()){
+              vector<int> ans;
+              Node* curr = q.front();
+              q.pop();
+              
+              ans.push_back(curr -> data);
+              if(curr -> left) q.push(curr -> left);
+              if(curr -> right) q.push(curr -> right);
+               res.push_back(ans);
+          }
+        
+        return res;
+    }
+};
