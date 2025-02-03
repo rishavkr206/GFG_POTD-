@@ -1,0 +1,17 @@
+Height of Binary Tree 
+
+
+
+
+class Solution {
+  public:
+    // Function to find the height of a binary tree.
+    int height(Node* node) {
+        if(node == NULL) return -1;
+        
+        int LHeight = height(node -> left);
+        int RHeight = height(node -> right);
+        
+        return max(LHeight, RHeight)+1;
+    }
+};
