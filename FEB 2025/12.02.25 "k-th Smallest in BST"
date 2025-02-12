@@ -1,0 +1,20 @@
+k-th Smallest in BST
+
+
+class Solution {
+  public:
+    // Return the Kth smallest element in the given BST
+    void inorder(Node *root,vector<int> &temp){
+        if(!root ) return;
+        inorder(root -> left, temp);
+        temp.push_back(root -> data);
+        inorder(root-> right, temp);
+    }
+    int kthSmallest(Node *root, int k) {
+        // if(!root-> left && !root -> right) return;
+        vector<int> temp;
+        inorder(root, temp);
+        if(k>temp.size()) return -1;
+        return temp[k-1];
+    }
+};
