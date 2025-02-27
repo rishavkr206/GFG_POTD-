@@ -1,0 +1,35 @@
+Get Min from Stack
+
+
+class Solution {
+  public:
+   int mini;
+    stack<int>st;
+    Solution() {
+    }
+    void push(int x) {
+        if(st.empty()) mini=x;
+        else if(x<=mini){
+            st.push(mini);
+            mini=x;
+        }
+        st.push(x);
+    }
+    void pop() {
+        if(st.empty()) return;
+        int temp=st.top();
+        st.pop();
+        if(temp==mini && !st.empty() ){
+            mini=st.top();
+            st.pop();
+        }
+    }
+    int peek() {
+        if(st.empty()) return -1;
+        return st.top();
+    }
+    int getMin() {
+        if(st.empty()) return -1;
+        return mini;
+    }
+};
