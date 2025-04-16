@@ -1,0 +1,27 @@
+Bellman-Ford
+
+class Solution {
+  public:
+    vector<int> bellmanFord(int V, vector<vector<int>>& edges, int src) {
+        // Code here
+        vector<int>ans(V,1e8);
+        ans[src] = 0;
+         
+        // for +ve
+        for(int i = 0; i< V-1;i++){
+            for(auto it : edges){
+                if(ans[it[0]] == 1e8) continue;
+                else {
+                    ans[it[1]] = min(ans[it[1]], ans[it[0]]+it[2]); // it[0] = u it[1]= v ,it[2] = cost
+                }
+            }
+        }
+            for(auto it : edges){
+                if(ans[it[1]] == 1e8) continue;
+                else {
+                    if(ans[it[1]]> ans[it[0]]+it[2] ) return {-1};
+                }
+            }
+        return ans;
+    }
+};
