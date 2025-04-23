@@ -1,0 +1,45 @@
+Unique Number II
+
+M1
+
+class Solution {
+  public:
+    vector<int> singleNum(vector<int>& arr) {
+        // Code here.
+        unordered_map<int, int>mp;
+        for(int i = 0 ;i<arr.size();i++){
+            mp[arr[i]]++;
+        }
+        vector<int>ans;
+        for(auto &pair : mp){
+            if(pair.second == 1){
+                ans.push_back(pair.first);
+            }
+        }
+        sort(ans.begin(), ans.end());
+        return ans;
+    }
+};
+
+M2
+
+class Solution {
+  public:
+    vector<int> singleNum(vector<int>& arr) {
+        // Code here.
+        // Optimised code T.C = O(n) , S.C = O(1)
+        int xor1  = 0 ; 
+        for(auto it : arr){
+            xor1^= it;
+        }
+        int set_bit = xor1 & -xor1;
+        int first = 0, second  = 0;
+        
+        for(int it : arr){
+            if(it &set_bit) first^=it;
+            else second^=it;
+        }
+        if(first<second) return { first, second};
+        else return {second, first};
+    }
+};
