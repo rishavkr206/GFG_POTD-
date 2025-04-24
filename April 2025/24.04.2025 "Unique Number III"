@@ -1,0 +1,43 @@
+Unique Number III
+
+M I : Brute force approach 
+
+class Solution {
+  public:
+    int getSingle(vector<int> &arr) {
+        // code here
+        // Bruteforce Approach
+        unordered_map<int,int>mp;
+        for(int i = 0 ;i < arr.size();i++){ //
+            mp[arr[i]]++;
+        }
+        
+        for(auto &pair : mp){
+            if(pair.second == 1){
+                return pair.first;
+            }
+        }
+        
+    }
+};
+
+M 2 : Optimal Approach :
+
+class Solution {
+  public:
+    int getSingle(vector<int> &arr) {
+        // code here
+        //Optmized code 
+        int ele = 0, mask , ones;
+        
+        for(int i = 0 ; i< 32; i++){
+            ones = 0 ;
+            mask = (1<<i);
+            for(int j = 0;j<arr.size();j++){
+                if(arr[j]&mask) ones++;
+            }
+            if((ones%3)!= 0) ele |= mask;
+        }
+        return ele;
+    }
+};
