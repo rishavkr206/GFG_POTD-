@@ -1,0 +1,30 @@
+Is Binary Tree Heap
+
+
+class Solution {
+  public:
+  
+    int count(Node* tree){
+        // empty tree (base case) 
+        if(!tree) return 0;
+        return 1+ count(tree->left) + count(tree->right);
+    }
+    bool solve(Node* tree, int i, int total){
+        //put both condition here
+        if(!tree) return true; // when complete traverse 
+        
+        if(i>= total) return false; // first condition
+        if(tree -> left && tree->data < tree->left->data) return false;
+        if(tree -> right && tree -> data < tree -> right -> data) false; // done with second condition
+        
+        return solve(tree-> left , 2*i+1, total) && solve(tree->right , 2*i+2 , total); //recursive call
+        
+    }
+    bool isHeap(Node* tree) {
+        // code here
+        //2 condition - a) completeness i>total false yaani gap hai 
+        // b) if parent < child to false 
+        int total = count(tree);
+        return solve(tree, 0, total);
+    }
+};
