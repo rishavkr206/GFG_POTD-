@@ -1,0 +1,19 @@
+Pascal Triangle
+
+class Solution {
+  public:
+    vector<int> nthRowOfPascalTriangle(int n) {
+        // code here
+        n--;
+        int prev = 1;
+        vector<int>res;
+        res.push_back(prev);
+        
+        for(int i = 1;i<=n;i++){
+            int curr = prev * (n+1-i)/i ;
+            res.push_back(curr);
+            prev = curr ;
+        }
+        return res;
+    }
+};
