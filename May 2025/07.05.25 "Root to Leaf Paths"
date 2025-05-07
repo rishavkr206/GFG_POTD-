@@ -1,0 +1,27 @@
+Root to Leaf Paths
+
+class Solution {
+  public:
+  
+    void solve(Node* root,vector<int>path , vector<vector<int>>& ans){
+        if(!root) return ;
+        path.push_back(root->data);
+        if(!root->left && !root->right){
+            ans.push_back(path);
+            path.pop_back(); // Backtrack
+            return;
+        }
+        if(root ->left) solve(root->left, path, ans );
+        if(root->right) solve(root -> right, path, ans);
+        path.pop_back();
+        
+        
+    }
+    vector<vector<int>> Paths(Node* root) {
+        // code here
+        vector<vector<int>>ans; //[[]]
+        vector<int>path; // []
+        solve(root,path,ans );
+        return ans;
+    }
+};
