@@ -1,0 +1,18 @@
+Missing element of AP
+
+class Solution {
+    public:
+      int findMissing(vector<int> &arr) {
+          int n = arr.size();
+          int commonDiff = arr[1] - arr[0];
+          int ans = 0;
+          for(int i = 0; i < n; i++){
+              if(arr[i] + commonDiff != arr[i + 1]){
+                  ans  = arr[i] + commonDiff;
+                  break;
+              }
+          }
+          
+          return ans;
+      }
+  };
