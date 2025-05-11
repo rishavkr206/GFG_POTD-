@@ -1,0 +1,26 @@
+K-th Largest Sum Contiguous Subarray
+
+class Solution {
+  public:
+    int kthLargest(vector<int> &arr, int k) {
+        // code here
+        int n = arr.size();
+        // create a prefix sum
+        vector<int>pref(n+1,0);
+        for(int i = 0 ;i<n;i++) pref[i+1] = pref[i] +arr[i];
+        
+        // create a min heap
+        priority_queue<int, vector<int>,greater<int>>mp;
+        for(int i = 0;i<n;i++){
+            for(int j = i+1 ;j<=n;j++){
+                int sum = pref[j]-pref[i];
+                if(mp.size()<k) mp.push(sum);//
+                else if (sum > mp.top()){
+                    mp.pop();
+                    mp.push(sum);
+                }
+            }
+        }
+        return mp.top();
+    }
+};
