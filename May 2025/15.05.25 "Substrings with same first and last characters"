@@ -1,0 +1,40 @@
+Substrings with same first and last characters
+
+
+class Solution {
+  public:
+    int countSubstring(string &s) {
+        // code here
+       // int n = s.size();
+        int count = s.size();
+        
+        // map
+        unordered_map<int, int>mp;
+        for(auto i : s){
+            if(mp.find(i)!=mp.end()) count+=mp[i];
+            mp[i]++;
+        }
+        return count;
+    }
+};
+
+M2 solution
+
+class Solution {
+  public:
+    int countSubstring(string &s) {
+        vector<int> freq(26, 0); 
+        for (char ch : s) {
+            freq[ch - 'a']++;
+        }
+
+        int total = 0;
+        for (int f : freq) {
+            if (f > 0) {
+                total += (f * (f + 1)) / 2;
+            }
+        }
+
+        return total;
+    }
+};
