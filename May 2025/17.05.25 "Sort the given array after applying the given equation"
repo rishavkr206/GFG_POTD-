@@ -1,0 +1,58 @@
+Sort the given array after applying the given equation
+
+class Solution {
+  public:
+    vector<int> sortArray(vector<int> &arr, int A, int B, int C) {
+        // code here
+        vector<int>ans;
+        int x; // take from arr
+        //int fx = (A*x^2)+(B*x)+C;
+        for(int i =0 ; i<arr.size();i++){
+           // x = arr[i];
+            int a = (A*arr[i]*arr[i])+(B*arr[i])+C;
+            ans.push_back(a);
+        }
+        sort(ans.begin(), ans.end());
+        return ans;
+    }
+};
+
+
+M2
+class Solution {
+  public:
+    vector<int> sortArray(vector<int> &arr, int A, int B, int C) {
+        // code here
+        int n =arr.size();
+        int s=0, e =n-1,i=0;
+        if(A>0)i = n-1;//
+        vector<int>ans(n);
+        while(s<=e){
+            int aS= (A*arr[s]*arr[s])+(B*arr[s])+C;
+            int aE= (A*arr[e]*arr[e])+(B*arr[e])+C;
+            
+            if(A>0){
+                if(aS>aE){
+                    ans[i]=aS;
+                    s++;
+                }
+                else{
+                    ans[i]= aE;
+                    e--;
+                }
+                i--;
+            } else {
+                if(aS<aE){
+                    ans[i] = aS;
+                    s++;
+                }
+                else{
+                    ans[i] = aE;
+                    e--;
+                }
+                i++;
+            }
+        }
+        return ans;
+    }
+};
