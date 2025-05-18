@@ -1,0 +1,29 @@
+Level Order in spiral form
+
+class Solution {
+  public:
+    vector<int> findSpiral(Node* root) {
+        // code here
+        vector<int> res;
+        queue<Node*> q;
+        q.push(root);
+        int level = 0;
+        while (!q.empty()) {
+            int n = q.size();
+            vector<int> temp;
+            for (int i=0; i<n; i++) {
+                Node* node = q.front();
+                q.pop();
+                temp.push_back(node->data);
+                if (node->left) q.push(node->left);
+                if (node->right) q.push(node->right);
+            }
+            if (level%2==0) {
+                reverse(temp.begin(), temp.end());
+            }
+            for (int i: temp) res.push_back(i);
+            level++;
+        } return res;
+        
+    }
+};
