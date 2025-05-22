@@ -1,0 +1,47 @@
+Minimum Deletion
+
+class Solution {
+  public:
+     // 1st approach
+    int mindelR(int i, int j, string &s, vector<vector<int>>&dp){
+        if(i>=j) return 0;
+        if(dp[i][j]!=-1) return dp[i][j];
+        if(s[i]== s[j]) {
+            dp[i][j]= mindelR(i+1,j-1,s, dp);
+        }else{
+            dp[i][j] =  1+min(mindelR(i+1,j,s, dp),mindelR(i,j-1,s, dp));
+        }
+        return dp[i][j];
+    }
+    int minDeletions(string s) {
+        // code here
+        int n = s.size();
+        vector<vector<int>>dp(n,vector<int>(n,-1));
+        return mindelR(0,n-1,s,dp);
+    }
+};
+
+
+class Solution {
+  public:
+  //2nd approach
+  int solve(string &s, string &r, int i, int j , vector<vector<int>>&dp){ // 
+      if(i >= s.size()||j >= r.size()) return 0;
+      if(dp[i][j]!=-1) return dp[i][j] ; //
+      int take = 0, notake = 0;
+      
+      if(s[i] == r[j]) take = 1+ solve (s, r, i+1, j+1,dp); // 
+      notake = max(solve(s, r, i+1,j,dp),solve(s,r,i,j+1,dp));
+      
+      return dp[i][j] = max(take, notake);
+      
+  }
+    int minDeletions(string s) {
+        // code here
+        string r = s;
+        reverse(r.begin(), r.end());
+        int n = s.size();
+        vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
+        return s.size()-solve(s,r, 0,0,dp);
+    }
+};
