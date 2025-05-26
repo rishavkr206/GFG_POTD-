@@ -1,0 +1,22 @@
+Insert in Sorted Circular Linked List
+
+class Solution {
+  public:
+    Node* sortedInsert(Node* head, int data) {
+        // code here
+        // 2 case possible -> 1. Head > data  2. 
+    
+        Node* newNode = new Node(data), *temp = head;
+        if(head ->data >  data ){
+            newNode -> next = head;
+            while(temp -> next != head) temp = temp -> next;
+            temp -> next = newNode;
+            return newNode;
+        }
+        while(temp->next != head && temp -> next->data <= data) temp = temp  -> next;
+        newNode->next = temp ->next;
+        temp->next = newNode;
+        return head;
+        
+    }
+};
