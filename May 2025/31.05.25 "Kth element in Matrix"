@@ -1,0 +1,59 @@
+Kth element in Matrix
+
+M-1:
+
+class Solution {
+  public:
+    int kthSmallest(vector<vector<int>> &matrix, int k) {
+        // code here
+        // Brute force 
+        // 1. Matrix into array then sort and return k-1 element 
+        vector<int>res;
+        int n = matrix.size();
+        for(int i = 0; i<n;i++){
+            for(int j = 0; j<n; j++){
+                res.push_back(matrix[i][j]);
+            }
+        }
+        sort(res.begin(), res.end());
+        
+        return res[k-1];
+    }
+};
+
+M-2:
+
+class Solution {
+  public:
+    // Optimised approach 
+    int count(vector<vector<int>> &matrix, int ele){
+        int n = matrix.size();
+        int cnt = 0 , r =0 , c= n-1;
+        while(r < n && c>=0){
+            if(matrix[r][c] <= ele){
+                cnt+=c+1;
+                r++;
+            }else c--;
+        }
+        return cnt;
+    }
+    int kthSmallest(vector<vector<int>> &matrix, int k) {
+        // code here
+        int n = matrix.size();
+        int s = matrix[0][0];
+        int e = matrix[n-1][n-1];
+        
+        int ans = 0;
+        while(s<=e){
+            int mid = s +(e-s)/2;
+            int cnt = count(matrix, mid);
+            
+            if(cnt < k ) s = mid+1;
+            else {
+                ans = mid;
+                e = mid -1;
+            }
+        }
+        return ans;
+    }
+};
