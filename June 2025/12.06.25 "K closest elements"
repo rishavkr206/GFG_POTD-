@@ -1,0 +1,46 @@
+K closest elements
+
+class Solution {
+  public:
+    vector<int> printKClosest(vector<int> arr, int k, int x) {
+        // Code here
+        int n = arr.size();
+        int pos =-1;
+        
+        //Binary Search
+        int l=0, h=n-1;
+        while(l<=h){
+            int m = h-(h-l)/2 ;
+            if(arr[m] < x){
+                pos = m;
+                l = m+1;
+            }else{
+                h = m-1;
+            }
+        }
+        // find Elements
+        int left  =pos, right = pos+1;
+        if(right < n && arr[right] == x) right++;
+        vector<int>res;
+        while(left>=0 && right<n && res.size()<k){
+            int Ld = abs(arr[left]-x);
+            int Rd = abs(arr[right]-x);
+            if(Ld < Rd){
+                res.push_back(arr[left]);
+                left--;
+            }else{
+                res.push_back(arr[right]);
+                right++;
+            }
+        }
+        while(left>=0 && res.size() < k){
+            res.push_back(arr[left]);
+            left--;
+        }
+        while(right <n && res.size() <k){
+            res.push_back(arr[right]);
+            right++;
+        }
+        return res;
+    }
+};
