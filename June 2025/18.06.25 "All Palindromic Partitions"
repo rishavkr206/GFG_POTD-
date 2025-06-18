@@ -1,0 +1,46 @@
+All Palindromic Partitions
+
+
+
+class Solution {
+  public:
+  
+    // Palindrome
+    bool ispalindrome(string &s, int l, int r){
+        while(l<r){
+            if(s[l]!=s[r]){
+                return false;
+            }
+            l++;
+            r--;
+        }
+        return true;
+    }
+    
+    //Backtrack
+    void solve(int idx, string &s,vector<string>&curr ,vector<vector<string>>&res){
+        if(idx == s.size()){
+            res.push_back(curr);
+            return ;
+        }
+        for(int i = idx; i < s.size(); i++){
+            if(ispalindrome(s,idx, i)){
+                curr.push_back(s.substr(idx, i-idx+1));
+                solve(i+1, s, curr, res);
+                curr.pop_back();
+            }
+        }
+    }
+    
+    vector<vector<string>> palinParts(string &s) {
+        // code here
+          vector<vector<string>>res;
+          vector<string>curr;
+          
+          solve(0,s,curr,res);
+          return res;
+    }
+};
+
+
+
