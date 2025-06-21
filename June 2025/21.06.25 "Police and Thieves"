@@ -1,0 +1,26 @@
+Police and Thieves
+
+
+class Solution {
+  public:
+    int catchThieves(vector<char> &arr, int k) {
+        // Code here
+        int n = arr.size();
+        int count = 0, theif = 0, police = 0;
+        while(police<n && arr[police]!='P') police++;
+        while(theif <n && arr[theif]!='T')theif++;
+        
+        while(police <n  && theif <n ){
+            if(abs(police-theif)<=k){
+            count++;
+            police++;
+            theif++;
+            }
+            else if(theif <n && theif<police) theif++;
+            else if(police<n && police<theif) police++;
+             while(police<n && arr[police]!='P') police++;
+             while(theif <n && arr[theif]!='T')theif++;
+        }
+        return count;
+    }
+};
