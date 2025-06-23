@@ -1,0 +1,51 @@
+Minimum Sum
+
+
+
+class Solution {
+  public:
+    
+    string addstring(string & s1, string &s2 ){
+        // add from last to first
+        int i = s1.length()-1;
+        int j = s2.length()-1;
+        int c=0;
+        string res ="";
+        
+        while(i>=0|| j>=0|| c>0){
+            int sum = c; // carry
+            if(i>=0){
+                sum+=(s1[i]-'0');
+            }
+            if(j>=0){
+                sum+=(s2[j]-'0');
+            }
+            res.push_back(sum%10 + '0');
+            c = sum/10;
+            i--;
+            j--;
+        }
+        while(!res.empty() && res.back() == '0'){
+            res.pop_back();
+        }
+        reverse (res.begin(), res.end());
+        return res;
+    }
+    string minSum(vector<int> &arr) {
+        // code here
+        //sort array first 
+        sort(arr.begin(), arr.end());
+        string s1 = "";
+        string s2= "";
+        
+        for(int i = 0; i<arr.size();i++){
+            if(i%2==0){ //even 
+                s1.push_back(arr[i]+'0'); // int to string
+            } else {
+                s2.push_back(arr[i]+'0');
+            }
+        }
+        
+        return addstring(s1,s2);
+    }
+};
