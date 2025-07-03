@@ -1,0 +1,22 @@
+Longest Substring with K Uniques
+
+class Solution {
+  public:
+    int longestKSubstr(string &s, int k) {
+        // code here
+        int maxi = -1, uniq = 0;
+        vector<int>freq(26,0);
+        int n = s.size();
+        for(int i = 0, j= 0; j<n;j++){
+        freq[s[j]-'a']++;
+        if(freq[s[j]-'a']==1) uniq++;
+        while(uniq>k){
+            freq[s[i]-'a']--;
+            if(freq[s[i]-'a'] == 0) uniq-- ;
+            i++;
+        }
+        if(uniq == k) maxi = max(maxi, j-i+1);
+        }
+        return maxi;
+    }
+};
