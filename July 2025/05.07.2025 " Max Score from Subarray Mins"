@@ -1,0 +1,33 @@
+
+Max Score from Subarray Mins
+M 1
+class Solution {
+  public:
+    int maxSum(vector<int> &arr) {
+        // code here
+        int n = arr.size();
+        int mx = INT_MIN;
+        for(int i=0; i<n; i++){
+            for(int j=i+1; j<n; j++){ // j>i, so size >=2
+                vector<int> temp(arr.begin()+i, arr.begin()+j+1);
+                sort(temp.begin(), temp.end());
+                int sum = temp[0] + temp[1]; // two smallest elements
+                mx = max(mx, sum);
+            }
+        }
+        return mx;
+    }
+};
+
+M 2
+class Solution {
+  public:
+    int maxSum(vector<int> &arr) {
+        // code here
+        int ans= 0;
+        for(int i = 1; i<arr.size();i++){
+            ans = max(ans, arr[i]+arr[i-1]);
+        }
+        return ans;
+    }
+};
